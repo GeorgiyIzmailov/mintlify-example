@@ -1,11 +1,11 @@
 ---
-title: 'Images and Embeds'
-description: 'Add image, video, and other HTML elements'
-icon: 'image'
+title: "Images and Embeds"
+description: "Add image, video, and other HTML elements"
+icon: "image"
 ---
 
 <img
-  style={{ borderRadius: '0.5rem' }}
+  style={{ borderRadius: "0.5rem" }}
   src="https://mintlify-assets.b-cdn.net/bigbend.jpg"
 />
 
@@ -26,7 +26,12 @@ Note that the image file size must be less than 5MB. Otherwise, we recommend hos
 To get more customizability with images, you can also use [embeds](/writing-content/embed) to add images
 
 ```html
-<img height="200" src="/path/image.jpg" />
+<script
+  id="inkeep-script"
+  src="https://unpkg.com/@inkeep/widgets-embed@0.2.267/dist/embed.js"
+  type="module"
+  defer
+></script>
 ```
 
 ## Embeds and HTML elements
@@ -39,7 +44,7 @@ To get more customizability with images, you can also use [embeds](/writing-cont
   frameBorder="0"
   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
   allowFullScreen
-  style={{ width: '100%', borderRadius: '0.5rem' }}
+  style={{ width: "100%", borderRadius: "0.5rem" }}
 ></iframe>
 
 <br />
