@@ -1,0 +1,44 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Update widget version
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the "main" branch
+  pull_request:
+    branches: [ "main" ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  update-widget-version:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Get widget version
+        id: get-widget-version
+        run: |
+          # Замените <YOUR_WIDGET_URL> на URL вашего виджета
+          widget_version=$(curl -s <YOUR_WIDGET_URL> | jq -r '.version')
+          echo "::set-output name=version::$widget_version"
+
+      - name: Update version in files
+        run: |
+          # Замените <FILES_TO_UPDATE> на пути к файлам, которые нужно обновить
+          sed -i "s/OLD_VERSION/$(echo "${{ steps.get-widget-version.outputs.version }}")/g" <FILES_TO_UPDATE>
+
+      - name: Commit changes
+        run: |
+          git config --global user.email "action@github.com"
+          git config --global user.name "GitHub Action"
+          git add .
+          git commit -m "Update widget version"
+          git push.
